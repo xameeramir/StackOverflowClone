@@ -1,0 +1,152 @@
+﻿@model UI.Models.Answer
+
+@{
+    TempData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Answer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.QuestionId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuestionId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.A_Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.A_Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.A_Wiki)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.A_Wiki)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.A_By)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.A_By)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.A_Dt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.A_Dt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.A_EditBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.A_EditBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.A_EditDt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.A_EditDt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.A_Edits)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.A_Edits)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.A_MarksEarned)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.A_MarksEarned)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.A_PremiumsEarned)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.A_PremiumsEarned)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.A_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.A_Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.A_StatusBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.A_StatusBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.A_Flags)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.A_Flags)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.A_FlagBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.A_FlagBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.A_QualityEarned)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.A_QualityEarned)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

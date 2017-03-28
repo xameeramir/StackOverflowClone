@@ -1,0 +1,93 @@
+﻿@model UI.Models.QAModel
+
+@{
+    TempData["Title"] = "Top answers";
+}
+
+<div class="left">
+    <div class="searchActions">
+
+        <div id=""></div>
+        <div>
+            <a title="Top answers" href=@Url.Action("Index", "Answers", new { @Sort = "Top" })>
+                <!-- <i class="fa fa-star"></i> --> Top
+            </a>
+        </div>
+
+        <div id=""></div>
+        <div>
+            <a title="Answers with recent edits" href=@Url.Action("Index", "Answers", new { @Sort = "Live" })>
+                Live
+            </a>
+        </div>
+
+        <div id=""></div>
+        <div>
+            <a title="Recent answers" href=@Url.Action("Index", "Answers", new { @Sort = "Newest" })>
+                Newest
+            </a>
+        </div>
+
+        <div id=""></div>
+        <div>
+            <a title="Oldest answers" href=@Url.Action("Index", "Answers", new { @Sort = "Oldest" })>
+                Oldest
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<div class="right">
+
+</div>
+
+<div class="middle">
+
+    @if (Model != null)
+    {
+        <div style="margin-left:auto; margin-right:auto; width:auto; display:inline-block; text-align:center;">
+            <p class="casual" title="Number of answers(s) found"> @Model.answer.answers.Count answers(s) </p>
+        </div>
+
+        <div class="Questions">
+            @if (Model.answer.answers != null)
+            {
+                if (Model.answer.answers.Count() > 0)
+                {
+                    foreach (var a in Model.answer.answers)
+                    {
+                        //a.A_Fields = "MySql";
+                        //a.A_Title = "MySql data source not appearing in Visual Studio 2013 community edition";
+                        <div class="rowItem" style="">
+                            <div class="A_Fields" title="#@a" style="float: right; width: auto; padding: 1px 5px;"> #@a </div>
+
+                            <div class="Votes" title="@a.A_MarksEarned marks" style="display:inline;">
+                                <i class="fa fa-check"></i> @a.A_MarksEarned
+                            </div>
+
+                            <div class="A_Title" style="display:inline;">
+                                <a title="@a.A_Wiki" href="/Questions/Details?QuestionId=@a.QuestionId&_View=Details" class="title"> @a.A_Title </a>
+                            </div>
+
+
+                            <div class="A_Options" style="">
+
+                                @Html.ActionLink("Edit", "Edit", new { id = a.AnswerCount }) |
+                                @Html.ActionLink("Details", "Details", new { id = a.AnswerCount }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = a.AnswerCount })
+
+                                <i class="fa fa-calendar" title="Asked @a.A_Dt"> </i>
+                                <i class="fa fa-share-alt" title="@a. shares"> </i>
+                                <i class="fa fa-search" title="@a. views"> </i>
+
+                                <a title="Answered by /@a" href="@Url.Action("Account", "GetUser", new { a.A_By })"> /@a </a>
+                                <p title="Marks earned" class=" casual"> @a.A_ByMarksScore </p>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        </div>
+    }
+</div>                                      r

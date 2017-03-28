@@ -1,0 +1,273 @@
+﻿@model UI.Models.Question
+
+@{
+    TempData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Question</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AnswerCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnswerCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ans_Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ans_Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_Wiki)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_Wiki)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_By)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_By)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_Dt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_Dt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_EditBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_EditBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_EditDt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_EditDt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_Edits)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_Edits)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_QualityEarned)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_QualityEarned)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_Shares)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_Shares)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_Views)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_Views)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_Fields)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_Fields)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_F1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_F1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_F2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_F2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_F3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_F3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_F4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_F4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_F5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_F5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_ByUname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_ByUname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_EditByUname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_EditByUname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_Premiums)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_Premiums)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_PremiumByUname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_PremiumByUname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_PremiumBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_PremiumBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_StatusBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_StatusBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_StatusByUname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_StatusByUname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_Flags)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_Flags)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_FlagBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_FlagBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_FlagByUname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_FlagByUname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Q_ByMarksScore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Q_ByMarksScore)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm("Delete", "Questions", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,540 @@
+﻿.postComments {
+    width: 100%;
+    float: left;
+    padding: 0em 1em;
+font-size:0.9em;
+}
+
+    /*.postComments span {
+        width: 100%;
+        padding:0.5em;
+    }*/
+
+    .commentItem{
+    width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+        /*padding:0.5em 0.5em 1em 0.5em;*/
+    }
+
+.postComments .Votes .fa-chevron-circle-up,
+.postComments .Votes .fa-chevron-circle-down {
+    font-size:0.55em;
+}
+
+
+.homePage-searchOptions {
+    float: left;
+    line-height: 2em;
+    background-color: transparent;
+    border: none;
+    padding: 1px 6px;
+}
+
+*,
+*:after,
+*:before {
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-font-smoothing:antialiased;
+	font-smoothing:antialiased;
+	text-rendering:optimizeLegibility;
+}
+
+/* SOURCE: http://jsfiddle.net/techsin/TfLTR/ */
+
+	.VH-centered {
+	    font-size: 0;
+	    overflow: auto;
+	    text-align: center;
+	    /*styling>>*/
+	}
+	.VH-centered::before {
+	    content:'';
+	    display: inline-block;
+	    height: 100%;
+	    vertical-align: middle;
+	}
+        .VH-centered > div {
+            display: inline-block;
+            font-size: 19px;
+            margin: 20px;
+	    max-width: 320px;
+            width: 90%;
+            min-height: 20px;
+            min-width: 30px;
+            padding: 14px;
+            vertical-align: middle;
+            outline: none;
+        }
+
+*:hover{
+-webkit-transition: all 500ms ease;
+-moz-transition: all 500ms ease;
+-ms-transition: all 500ms ease;
+-o-transition: all 500ms ease;
+transition: all 500ms ease;
+}
+
+a,
+a:hover {
+	text-decoration:none;
+}
+
+#preloader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    width: 100vw;
+    line-height: 100vh;
+    height: 100vh;
+    overflow: visible;
+    color: black;
+    vertical-align: central;
+    text-align: center;
+    background-color: #fff;
+    background-image: linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px), linear-gradient(#eee .1em, transparent .1em);
+    background-size: 100% 1em;
+}
+
+.postWiki {
+    float: left;
+    width: 90%;
+}
+
+.postOptions-horizontal {
+    width: 100%;
+    height: auto;
+    float: left;
+    padding: 1em 2em 1em 1em;
+}
+
+.postOptions-vertical {
+    float: left;
+    width: 10%;
+    font-size: 0.8em;
+    text-align: center;
+}
+
+/*.postOptions-vertical .fa{
+    color: #D3D3D3;
+}*/
+
+.postCount span {
+    padding: 0.5em;
+    float: left;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 500;
+    width: 100%;
+}
+
+.Author {
+    font-size: 0.8em;
+    float: right;
+    background-color: #eee;
+    display: block;
+    padding: 1em;
+border: 1px solid white;
+}
+
+.Commenter{
+    float: right;
+    font-size: 0.9em;
+    padding: 1em;
+}
+.Commenter .casual,    
+.Author a {
+    padding:0.5em;
+        font-size:inherit;
+    }
+
+.wmd-input,
+.wideInput{
+width:70%;
+max-width:none;
+}
+
+.paper{
+    background-color: #fff; 
+background-image: 
+linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+linear-gradient(#eee .1em, transparent .1em);
+background-size: 100% 1em;
+}
+
+.Warning{
+    padding:10px;
+     border:1px solid #ffd42c;
+}
+
+.postMeta{
+    padding:0em 0em 2em 0em;
+height:2em;
+}
+
+.validation-summary-errors {
+}
+
+.field-validation-error {
+      color: #a94442;
+        font-size:0.8em;
+}
+
+.casual{
+display: inline-block;
+  font-size: 0.7em;
+  color: #D3D3D3;
+  text-align: center;
+}
+
+    .casual a {
+        color: inherit;
+        font-weight: bold;
+    }
+
+.siteMeta{
+    width: 100%;
+  font-size: 0.6em;
+}
+.siteMeta a{
+padding:1em;
+}
+
+.form-group .casual {
+    float: left;
+    padding: 0.5em 1em;
+}
+
+.postMeta .fa{
+    color:#337ab7;
+}
+
+.rowItem {
+    float: left;
+    background-color: white;
+    padding: 1em 0em;
+    width:100%;
+}
+
+.rowItem .fa{
+color: #D3D3D3;
+font-size:0.8em;
+}
+
+.Votes .fa{
+    color:#337ab7;
+    padding:0px;
+}
+
+.Votes .fa-chevron-circle-down {
+    font-size: 0.85em;
+}
+
+.Votes .fa-chevron-circle-up {
+    font-size: 1em;
+}
+
+.Votes .fa:hover,
+.Votes .fa:focus {
+  color: #4C8EFA;
+}
+
+.Votes div {
+display:inline-block;
+}
+
+.Items .Votes {
+    left: 10px;
+    width: auto;
+    padding: 0px 15px 0px 0px;
+    display: inline-block;
+    font-size: 2em;
+    text-align: center;
+}
+
+.postTitle {
+height: auto;
+width:100%;
+padding:1em;
+float:left;
+}
+
+.postFields
+{
+font-size: 0.7em;
+  padding: 1px 5px;
+  color: #46799b;
+  background: #e0eaf1;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 2px 0 0 2px;
+  width: auto; 
+}
+
+
+.rowItem:hover{
+    background-color: #f5f8fa;
+}
+
+
+.left {
+    float: left;
+    display: inline-block;
+}
+
+.middle {
+    display: block;
+    overflow:hidden;
+    padding-left:3%;
+    margin-right:auto;
+    width:60%;
+}
+
+.right {
+    float: right;
+    display: inline-block;
+}
+
+#StatusMsg {
+text-align: center;
+  font-size: 1.3em;
+  height: 42px;
+  position: relative;
+  height: 2em;
+  padding: 2px;
+}
+
+.stripped{
+background-color: white;
+background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, #e0eaf1 10px, #e0eaf1 40px);
+}
+
+.dotted
+{
+    background:
+radial-gradient(#396 15%, transparent 16%) 0 0,
+radial-gradient(#396 15%, transparent 16%) 4px 4px,
+radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 4px 4px;
+background-color:#99ccb2;
+background-size:8px 8px;
+}
+
+.midText {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    text-align:center;
+}
+    .midText div {
+    }
+
+/*.tour*/
+        div.grippie {
+            background:url("../Images/Static/grippie.png") no-repeat scroll center 2px;
+            border: hidden;
+            cursor: s-resize;
+            height: 9px;
+            overflow: hidden;
+        }
+
+::-webkit-resizer {
+    display:none;
+}
+
+textarea { 
+    resize:vertical; 
+}
+
+::-webkit-input-placeholder {
+   font-family:'Segoe UI';
+   vertical-align:central;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   font-family:'Segoe UI';
+   vertical-align:central;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   font-family:'Segoe UI';
+   vertical-align:central;
+}
+
+:-ms-input-placeholder {  
+   font-family:'Segoe UI';
+   vertical-align:central;
+}
+
+span {
+    font-style: italic;
+    font-weight:normal;
+}
+
+.Attention{
+color:#E94848;
+background-color:#FFB6C1;
+}
+
+.Attention .fa{
+color:#E94848;
+}
+
+.fa-flag:hover{
+    color:#E94848;
+}
+
+.fa-play:hover{
+    color:#ffd42c;
+}
+
+.fa-refresh:hover{
+color:black;
+}
+
+.fa-plus:hover{
+    color:grey;
+}
+
+
+.fa-question,
+.fa-check,
+.fa-check-circle{
+    color:#50D050;
+}
+
+.success{
+color:#396;
+}
+
+.fa {
+    padding:0px 5px;
+    transition: background-color 0.3s ease-out;
+}
+
+/* Original Tutorial: http://www.cssreset.com/2010/css-tutorials/how-to-keep-footer-at-bottom-of-page-with-css/ */
+
+html,
+body {
+    padding-top: 0px;
+    padding-bottom: 20px;
+	height:100%;
+    font-family:'Segoe UI';
+    font-size:1.5em;
+    word-wrap:break-word;
+}
+
+.leftDiv {
+  height: 100%;
+  float: left;
+}
+
+.wrapDiv{
+    overflow:hidden;
+}
+
+.midDiv {
+  height: 100%;  
+}
+
+.rightDiv {
+  height: 100%;
+  float: right;
+}
+
+#wrapper {
+	min-height:100%;
+	position:relative;
+}
+
+#header {
+background: #1e73be;
+  padding: 2px 2px 2px 2px;
+height:auto;
+}
+
+#content {
+	padding-bottom:100px; /* Height of the footer element */
+}
+
+#footer {
+/*position:absolute;
+	background:#1e73be;*/
+	width:100%;
+	height:2em;
+	bottom:0;
+	left:0;
+}
+
+.searchActions
+{
+}
+
+    .searchActions a {
+        margin: 1em;
+    }
+
+.arrow-right{
+width: 0;
+height: 0;
+border-style: solid;
+border-width: 5px 0 5px 10px;
+display:inline-block;
+border-color: transparent transparent transparent #1e73be;
+}
+
+.text{
+font-weight:300;
+}
+
+.title {
+    color: black;
+    font-weight: 500;
+    font-size: 1.5em;
+}
+
+.title:hover,
+.title:active {
+    color: initial;
+}
+
+.themeEle
+{
+  color:white;
+  background-color:#1e73be;
+  transition: background-color 0.3s ease-out;
+  font-size: 0.9em;
+}
+
+.themeEle:active
+{
+  color:black;
+  transition: background-color 0.3s ease-out;
+}
+
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}

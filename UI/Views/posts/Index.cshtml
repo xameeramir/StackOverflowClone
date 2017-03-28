@@ -1,0 +1,183 @@
+﻿@model IEnumerable<UI.Models.post>
+
+@{
+    TempData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.postType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postWiki)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postEditBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postEditDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postByUname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postEditByUname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postMarksEarned)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postPremiums)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postPremiumsBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postPremiumsByUname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postQualityEarned)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postShares)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postStatusBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postStatusByUname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postF1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postF2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postF3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postF4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postF5)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postFlags)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postFlagsBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postFlagsByUname)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.postType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postWiki)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postEditBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postEditDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postByUname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postEditByUname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postMarksEarned)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postPremiums)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postPremiumsBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postPremiumsByUname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postQualityEarned)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postShares)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postStatusBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postStatusByUname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postF1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postF2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postF3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postF4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postF5)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postFlags)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postFlagsBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postFlagsByUname)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.postId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.postId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.postId })
+        </td>
+    </tr>
+}
+
+</table>

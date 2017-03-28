@@ -1,0 +1,90 @@
+﻿@model  UI.Models.ApplicationUser
+@using UI.Models;
+
+<style>
+    .rowItem .fa {
+  color: #D3D3D3;
+     font-size: 1em;
+}
+</style>
+
+<div class="row">
+
+    <div class="col-md-2"> </div>
+
+    <div class="col-md-6">
+
+        <h2>
+            The league
+        </h2>
+
+        <hr/>
+        
+        @for (int i = 0; i < Model.AppUsers.Count;)
+        {
+            var user = Model.AppUsers[i];
+            i++;
+
+            <div style="padding:0.1em;" class="pull-left">
+
+                <img class="pull-left" title="@user.UserName's icon" src="@Url.Action("Index", "NIdenticon", new { dimension = 48 , text =
+                                                          string.Format("{0}{1}{2}",user.UserName,DateTime.Now.Date, user.MarksScore)
+                                                          }) " />
+
+                <h3 class="pull-left" style="padding:0.5em;" title="Username">
+                    <a href="/Account/UserProfileByUserNumber?UserNumber=@user.UserNumber">
+                        @user.UserName.RemoveHandleFromUserName() @* TODO: implement this later - (@user.Title)*@
+                    </a>
+                </h3>
+
+                <h4 class="pull-left" style="padding:0.5em; display:inline-block;" title="Total marks score"> @user.MarksScore </h4>
+
+                <span style="width:100%;" class="casual">
+
+                    <i class="fa fa-map-marker"> @user.Location </i>
+                    <i class="fa fa-link"> @user.Website </i>
+                </span>
+
+            </div>
+
+        }
+    </div>
+
+    <div class="col-md-4"> </div>
+
+</div>
+
+@*{
+        TempData["Title"] = "League";
+        List<UI.Models.ApplicationUser> LeagueData = (List<UI.Models.ApplicationUser>)TempData["AppUsers"];
+        var grid = new WebGrid(source: LeagueData);
+    }
+
+    <h2> The league </h2>
+
+    @{
+        @grid.GetHtml(htmlAttributes: new { id = "DataTable" }, columns: grid.Columns(
+                             grid.Column(columnName: "UserNumber"),
+                             grid.Column(columnName: "ProfileUrl"),
+                             grid.Column(columnName: "FName"),
+                             grid.Column(columnName: "MName"),
+                                                               grid.Column(columnName: "LName"),
+                                                        grid.Column(columnName: "DOB"),
+                                                        grid.Column(columnName: "InterestedFields"),
+                                                        grid.Column(columnName: "Title"),
+                                                        grid.Column(columnName: "MarksScore"),
+                                                        grid.Column(columnName: "BadgeCount"),
+                               grid.Column(columnName: "TrophyCount"),
+                                        grid.Column(columnName: "CertsCount"),
+                                                 grid.Column(columnName: "Location"),
+                                                 grid.Column(columnName: "Bio"),
+                                                 grid.Column(columnName: "Joined"),
+                              grid.Column(columnName: "UserAcStatus"),
+                                                grid.Column(columnName: "DisplayStatus"),
+                                                grid.Column(columnName: "Website"),
+        grid.Column(columnName: "SocialLinksId"),
+                                     grid.Column(columnName: "UserName", header: "ToEdit", format: @<text>@Html.ActionLink("Edit", "Edit", "UpdateProfile", new { id = item.UserNumber }, new { target = "_blank" })</text>))
+        );
+    }
+
+*@

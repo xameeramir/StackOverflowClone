@@ -1,0 +1,78 @@
+﻿@model UI.Models.QAModel
+
+    <div class="rowItem">
+
+        <div class="postTitle" style="">
+
+            <a title="Click to view this post in full screen" href="/Answers/Details?AnswerId=@Model.answer.AnswerId" class="title">
+                @Model.answer.A_Title
+            </a>
+
+        </div>
+
+        <div class="postOptions-vertical" style="">
+            @*
+    <div>
+        <a title="Click to flag this post as inappropriate" href="@Url.Action("Flag", "Posts", new { id =Model.answer.AnswerId })">
+            <i style="" class="fa fa-flag"> </i>
+        </a>
+    </div>
+            *@
+            <div>
+                <a title="Click to improve this post" href="/Answer/Edit?AnswerId=@Model.answer.AnswerId&_View=Edit">
+                    <i class=" fa fa-refresh"> </i>
+                </a>
+            </div>
+
+            <div>
+                <a title="Click to ask for clarification" href="/AnswerComments/Create?AnswerId=@Model.answer.AnswerId">
+                    <i class=" fa fa-info-circle"> </i>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="postWiki" style="">
+
+            @Model.answer.A_Wiki
+
+        </div>
+
+        <div class="postOptions-horizontal" style="">
+
+            <div class="Votes" style="" title="This post earned @Model.answer.A_MarksEarned marks">
+
+                <a href="/posts/postMarks?returnUrl=@ViewContext.HttpContext.Request.Url.PathAndQuery&MarksType=1&postId=@Model.answer.AnswerId&postType=@Model.answer.postType&postBy=@Model.answer.A_By">
+                    <i class="fa fa-chevron-circle-up" title="This post is useful"></i>
+                </a>
+
+                <div>
+                    @Model.answer.A_MarksEarned
+                </div>
+
+                <a href="/posts/postMarks?returnUrl=@ViewContext.HttpContext.Request.Url.PathAndQuery&MarksType=-1&postId=@Model.answer.AnswerId&postType=@Model.answer.postType&postBy=@Model.answer.A_By">
+                    <i class="fa fa-chevron-circle-down" title="Click to mark this as not useful"></i>
+                </a>
+
+            </div>
+
+            <div class="Author">
+
+                <a href="/Account/UserProfileByUserName?UserName=@Model.answer.A_ByUname" title="Author">
+                    by @Model.answer.A_ByUname
+                </a>
+
+                <span title="Total marks scored"> @Model.answer.A_ByMarksScore </span>
+                <!-- add user profile badge data everywhere <span title="Trophies awarded"> <i class="fa fa-trophy"> </i> </span> class="casual">
+                <span title="Certificates awarded"> <i class="fa fa-certificate"></i> </span -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+    @*<a class="tab" title="Click to listen" onclick="speak('@Model.answer.A_Wiki')">
+        <i class="fa fa-play"></i> TODO: add this - > Speak (beta)
+    </a>*@
+    

@@ -1,0 +1,221 @@
+﻿@model UI.Models.Answer
+
+@{
+    TempData["Title"] = "Improve answer";
+}
+
+<link rel="stylesheet" href="~/Content/mdStyles/mdMain.css" />
+<script type="text/javascript" src="~/Scripts/mdScripts/Markdown.Converter.js"></script>
+<script type="text/javascript" src="~/Scripts/mdScripts/Markdown.Sanitizer.js"></script>
+<script type="text/javascript" src="~/Scripts/mdScripts/Markdown.Editor.js"></script>
+
+@if (TempData["Guideline"] != null)
+{
+    <div class="VH-centered">
+        <div class="alert alert-info">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <p class="" style="text-align:center;"> @Html.Raw(TempData["Guideline"]) </p>
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("Update", "Answers", FormMethod.Post))
+{
+
+    <div class="form-group">
+        @Html.HiddenFor(model => model.QuestionId)
+
+        @Html.AntiForgeryToken()
+        <div class="row">
+
+            <hr />
+            <div class="col-md-2"></div>
+            <div class="col-md-7">
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.A_Title, new { @placeholder = "Answer title", @class = "wideInput form-control" })
+                        @Html.LabelFor(model => model.A_Title, new { @class = "casual" })
+                        @Html.ValidationMessageFor(model => model.A_Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    @*Html.LabelFor(model => model.Q_Wiki, htmlAttributes: new { @class = "control-label col-md-2" })*@
+
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10">
+
+                            @Html.LabelFor(model => model.A_Wiki, new { @class = "casual" })
+                            <div class="wmd-panel">
+                                <div>
+                                    <div id="wmd-button-bar"></div>
+
+                                    <textarea class="wmd-input form-control" cols="90" data-val="true" data-val-required="* Describe your answer" id="wmd-input" name="A_Wiki" placeholder="Answer description" rows="15">
+                                        @Model.A_Wiki
+                                    </textarea>
+                                    @Html.ValidationMessageFor(model => model.A_Wiki)
+                                </div>
+                                <div id="wmd-preview" class="wmd-preview">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!--TODO: Remove this - it is needed to test MathJax $\sin^2 \theta$-->
+                        <div class="col-md-1"></div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-2"></div>
+
+            <div class="col-md-7">
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.A_EditSummary, new { @placeholder = "Explain why edit was needed", @class = "wideInput form-control" })
+                        @Html.LabelFor(model => model.A_EditSummary, new { @class = "casual" })
+                        @Html.ValidationMessageFor(model => model.A_EditSummary)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <!--class was removed col-md-offset-2 -->
+                        <input type="submit" value="Update answer" class="btn btn-default" />
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-3"></div>
+
+        </div>
+
+
+    </div>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/javascript">
+    (function () {
+        var converter1 = Markdown.getSanitizingConverter();
+
+        converter1.hooks.chain("preBlockGamut", function (text, rbg) {
+            return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
+                return "<blockquote>" + rbg(inner) + "</blockquote>\n";
+            });
+        });
+
+        var editor1 = new Markdown.Editor(converter1);
+
+        editor1.run();
+    })();
+</script>
+
+@*model UI.Models.QAModel
+
+@{
+    TempData["Title"] = "Improve answer";
+}
+
+@if (TempData["Guideline"] != null)
+{
+    <div class="VH-centered">
+        <div class="alert alert-info">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <p class="" style="text-align:center;"> @Html.Raw(TempData["Guideline"]) </p>
+        </div>
+    </div>
+}
+
+<div class="row">
+
+    <div class="col-md-2"></div>
+
+    <div class="col-md-7">
+        <hr />
+
+        @using (Html.BeginForm("Update", "Answers", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal" id="AnswerForm" style="float:left;">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @Html.HiddenFor(model => model.question.QuestionId)
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.answer.A_Title, new { @placeholder = "Answer title", @class = "wideInput form-control" })
+                        @Html.LabelFor(model => model.answer.A_Title, new { @class = "casual" })
+                        @Html.ValidationMessageFor(model => model.answer.A_Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="wmd-panel">
+                            <div id="wmd-button-bar"></div>
+                            @Html.TextAreaFor(model => model.answer.A_Wiki, new { @placeholder = "Answer description", @class = "wmd-input form-control", @id = "wmd-input", @name = "mas", @cols = "90", @rows = "15" })
+                            @Html.LabelFor(model => model.answer.A_Wiki, new { @class = "casual" })
+                            @Html.ValidationMessageFor(model => model.answer.A_Wiki)
+                        </div>
+
+                        <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+                        <!--use this to test MathJax : $\sin^2 \theta$-->
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.answer.A_EditSummary, new { @placeholder = "Explain why edit was needed", @class = "wideInput form-control" })
+                        @Html.LabelFor(model => model.answer.A_EditSummary, new { @class = "casual" })
+                        @Html.ValidationMessageFor(model => model.answer.A_EditSummary)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <!--class was removed col-md-offset-2 -->
+                        <input type="submit" value="Update post" class="btn btn-default" />
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+    <div class="col-md-3"></div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+*@

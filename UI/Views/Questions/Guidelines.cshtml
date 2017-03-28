@@ -1,0 +1,21 @@
+﻿@model UI.Models.Question
+
+@{
+    TempData["Title"] = "Ask great questions";
+}
+
+<h2 style="text-align:center;"> How to ask great questions </h2>
+
+<div>
+    <hr />
+    <div class="dl-horizontal">
+        <p>
+            Please be specific and clear.
+        </p>
+
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit") |
+    @Html.ActionLink("Back to List", "Index")
+</p>

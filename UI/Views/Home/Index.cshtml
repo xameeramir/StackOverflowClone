@@ -1,0 +1,75 @@
+﻿@model UI.Models.LoginViewModel
+
+<style>
+    .col-md-4 {
+        text-align: center;
+    }
+</style>
+
+<div class="jumbotron paper">
+
+    @*TODO: implement global search, shall we use Google custom search? for this.
+        <div class="">
+
+        <div class="lead">
+
+            <div class="VH-centered">
+                <div>
+                    <form>
+                        <input class="" type="text" tabindex="1" placeholder="Search questions here..." style="float:left; line-height:2em;" required>
+                        <button title="Click to search all questions" class="homePage-searchOptions" style="" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>*@
+
+    <div class="row">
+        <div class="col-md-4">
+            <a href="/Home/Overview#Asking">
+                <h2>
+                    Ask questions
+                </h2>
+            </a>
+
+            <i title="We can ask our academic questions" class="fa fa-question"> </i>
+            <p>
+                <a href="/Questions/Create"> Ask for help </a>
+            </p>
+
+        </div>
+
+        <div class="col-md-4">
+            <a href="/Home/Overview#Contribution"> <h2> Contribute knowledge </h2> </a>
+
+            <i title="We can contribute what we know by answering to questions" class="fa fa-check"> </i>
+            <p>
+                <a href="/Questions/Index"> Share your knowledge </a>
+            </p>
+
+        </div>
+        <div class="col-md-4">
+            <a href="/Home/Overview#QualityFactor">
+                <h2> Focus on high quality </h2>
+            </a>            
+
+            <i title="Stay focused to high quality of the content we post" class="fa fa-exclamation"> </i>
+            <p>
+             There is zero waste here </p>
+
+        </div>
+    </div>
+
+    <div style="float:right;">
+
+        <a title="Get your free account" href="/Account/Register" class="tab">
+            Join now, it's free
+        </a>
+
+    </div>
+
+</div>

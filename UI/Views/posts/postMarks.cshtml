@@ -1,0 +1,13 @@
+﻿@model UI.Models.Marks
+
+<div class="Votes" style="display:inline;">
+
+    <a href="/posts/postMarks?MarksType=1&postId=@Model.postId&postType=@Model.postType&MarksBy=@Model.MarksBy">
+        <i class="fa fa-chevron-circle-up" title="Click to mark it as useful"></i>
+    </a>
+    @Model.MarksAwarded
+    <a href="/posts/postMarks?MarksType=-1&postId=@Model.postId&postType=@Model.postType&MarksBy=@Model.MarksBy">
+        <i class="fa fa-chevron-circle-down" title="Click to mark it as not useful"></i>
+    </a>
+
+</div>

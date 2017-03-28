@@ -1,0 +1,175 @@
+﻿@model UI.Models.QAModel
+
+<div class="row">
+
+    <div class="col-md-2">
+        <div class="searchActions">
+
+            <div id=""></div>
+            <div>
+                <a title="Most viewed questions" href=@Url.Action("Index", "Questions", new { @Sort = "Popular" })>
+                    <!-- <i class="fa fa-star"></i> --> Popular
+                </a>
+            </div>
+
+            <div id=""></div>
+            <div>
+                <a title="Questions with no answers" href=@Url.Action("Index", "Questions", new { @Sort = "Unanswered" })>
+                    <!--<i class="fa fa-check"></i>--> Unanswered
+                </a>
+            </div>
+
+            <div id=""></div>
+            <div>
+                <a title="Recently asked questions" href=@Url.Action("Index", "Questions", new { @Sort = "Newest" })>
+                    Newest
+                </a>
+            </div>
+
+            <div id=""></div>
+            <div>
+                <a title="Questions with recent edits" href=@Url.Action("Index", "Questions", new { @Sort = "Live" })>
+                    Live
+                </a>
+            </div>
+
+            <div id=""></div>
+            <div>
+                <a title="Oldest questions" href=@Url.Action("Index", "Questions", new { @Sort = "Oldest" })>
+                    Oldest
+                </a>
+            </div>
+
+            @*
+                TODO: show these categories
+                <div id=""></div>
+                <div>
+
+                    <a title="Questions having open premiums" href=@Url.Action("Index", "Questions", new { @Sort = "Premium" })>
+                        <!--<i class="fa fa-diamond"></i>--> Premium
+                    </a>
+                </div>
+
+                <div id=""></div>
+                <div>
+                    <a title="Questions from interested fields" href=@Url.Action("Index", "Questions", new { @Sort = "Trending" })>
+                        <!--<i class="fa fa-area-chart"></i>--> Trending
+                    </a>
+                </div>
+            *@
+
+            <a class=" btn btn-default" title="Ask a question" style="display:inline-block; /*float:left;*/" href=@Url.Action("Create", "Questions")>
+                <i class="fa fa-question"> </i> Ask question
+            </a>
+
+        </div>
+    </div>
+
+    <div class="col-md-6">
+
+        @if (TempData["StatusMsg"] != null)
+        {
+            <div class="alert alert-info">
+                @TempData["StatusMsg"]
+            </div>
+        }
+
+        <div class="postCount" style="/**/">
+            <span title="Number of question(s) found"> @Model.question.questions.Count question(s) </span>
+        </div>
+
+
+        @if (Model != null)
+        {
+            if (Model.question.questions != null)
+            {
+                if (Model.question.questions.Count() > 0)
+                {
+                    <div class="Items">
+                        @foreach (var question in Model.question.questions)
+                        {
+
+                            <div class="rowItem">
+
+                                <a class="casual" title="Asked @question.Q_Dt" href="#">
+                                    <i class="fa fa-calendar"> </i>
+                                    Asked @Convert.ToInt64(DateTime.Now.Subtract(question.Q_Dt).TotalDays) day(s) ago
+                                </a>
+
+                                @if (question.Q_Edits > 0)
+                                {
+                                    <a class="casual" title="Improved @question.Q_Edits times" href="#">
+                                        <i class="fa fa-refresh"> </i>
+                                        @question.Q_Edits
+                                    </a>
+                                }
+
+                                @* TODO: implement sharing
+                                    <a class="casual" title="This question is shared @question.Q_Shares times" href="#">
+                                        <i class="fa fa-share-alt"> </i> @question.Q_Shares
+                                    </a>
+                                *@
+
+                                <a class="casual" title="This question is viewed @question.Q_Views times" href="#">
+                                    <i class="fa fa-dot-circle-o"> </i> @question.Q_Views
+                                </a>
+
+                                <div class="postFields" title="@question.Q_Fields" style="float: right;">
+                                    @question.Q_Fields
+                                </div>
+
+
+                                <div class="postTitle" style="">
+
+                                    <a title="Click to view this post" href="/Questions/Details?QuestionId=@question.QuestionId" class="title">
+                                        @question.Q_Title
+                                    </a>
+
+                                </div>
+
+                                <!--div class="postOptions-vertical" style="">
+
+                                </div-->
+
+                                <div class="postOptions-horizontal" style="">
+
+                                    <div class="Votes" style="font-size:1em;">
+
+                                        <div title="This post earned @question.Q_MarksEarned marks">
+                                            <i class="fa fa-chevron-circle-up"></i> @question.Q_MarksEarned
+                                        </div>
+
+                                        <div title="This post has @question.AnswerCount answers">
+                                            <i class="fa fa-check"></i> @question.AnswerCount
+                                        </div>
+
+                                    </div>
+
+                                    <div class="Author">
+
+                                        <a href="/Account/UserProfileByUserNumber?UserNumber=@question.Q_By" title="Asked by @question.Q_ByUname">
+                                            by @question.Q_ByUname
+                                        </a>
+
+                                        <span title="Total marks scored"> @question.Q_ByMarksScore </span>
+                                        <!--TODO: add user profile badge data everywhere<span title="Trophies awarded"> <i class="fa fa-trophy"> </i> </span> class="casual">
+                                        <span title="Certificates awarded"> <i class="fa fa-certificate"></i> </span-->
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        }
+                    </div>
+                }
+            }
+        }
+
+    </div>
+
+    <div class="col-md-4">
+    </div>
+
+</div>

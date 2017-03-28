@@ -1,0 +1,118 @@
+﻿.block-update-card {
+    float: left;
+    width:70%;
+}
+
+    .block-update-card .h-status {
+        width: 100%;
+        height: 7px;
+        background: repeating-linear-gradient(45deg,#606dbc,#606dbc 10px,#465298 10px,#465298 20px);
+    }
+
+    .block-update-card .v-status {
+        width: 5px;
+        height: 80px;
+        float: left;
+        margin-right: 5px;
+        background: repeating-linear-gradient(45deg,#606dbc,#606dbc 10px,#465298 10px,#465298 20px);
+    }
+
+    .block-update-card .update-card-MDimentions {
+    padding:0.5em;
+    }
+
+    .block-update-card .update-card-body {
+        margin-top: 10px;
+        margin: 5px;
+    }
+
+.update-card-body span {
+    vertical-align: middle;
+    line-height: 3em;
+    text-align: center;
+    width: 100%;
+    float: left;
+    border: 1px solid #D3D3D3;
+    margin: 1em;
+}
+
+        .block-update-card .update-card-body h4 {
+            color: #737373;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .block-update-card .update-card-body p {
+            font-size: 0.9em;
+        }
+
+    .block-update-card .card-action-pellet {
+        padding: 5px;
+    }
+
+        .block-update-card .card-action-pellet div {
+            margin-right: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            color: #dddddd;
+        }
+
+            .block-update-card .card-action-pellet div:hover {
+                color: #999999;
+            }
+
+    .block-update-card .card-bottom-status {
+        color: #a9a9aa;
+        font-weight: bold;
+        font-size: 14px;
+        border-top: #e0e0e0 1px solid;
+        padding-top: 5px;
+        margin: 0px;
+    }
+
+        .block-update-card .card-bottom-status:hover {
+            background-color: #dd4b39;
+            color: #FFFFFF;
+            cursor: pointer;
+        }
+/**/
+
+.card-body-social {
+    font-size: 1.5em;
+    margin-top: 10px;
+    float: right;
+}
+
+    .card-body-social .git {
+        color: black;
+        cursor: pointer;
+        margin: 10px;
+    }
+
+    .card-body-social .twitter {
+        color: #19C4FF;
+        cursor: pointer;
+        margin: 10px;
+    }
+
+    .card-body-social .google-plus {
+        color: #DD4B39;
+        cursor: pointer;
+        margin: 10px;
+    }
+
+    .card-body-social .facebook {
+        color: #49649F;
+        cursor: pointer;
+        margin: 10px;
+    }
+
+    .card-body-social .linkedin {
+        color: #007BB6;
+        cursor: pointer;
+        margin: 10px;
+    }
+
+    .profileIcon{
+        padding:2em;
+    }

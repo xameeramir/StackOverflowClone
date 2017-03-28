@@ -1,0 +1,96 @@
+﻿@model UI.Models.AnswerComment
+
+@{
+    TempData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>AnswerComment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentTxt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentTxt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentDt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentDt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentStatusBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentStatusBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentMarksEarned)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentMarksEarned)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentEdits)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentEdits)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnswerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnswerId)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

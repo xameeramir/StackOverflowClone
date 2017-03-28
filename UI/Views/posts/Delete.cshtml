@@ -1,0 +1,232 @@
+﻿@model UI.Models.post
+
+@{
+    TempData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>post</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.postType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postWiki)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postWiki)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postEditBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postEditBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postEditDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postEditDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postByUname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postByUname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postEditByUname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postEditByUname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postMarksEarned)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postMarksEarned)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postPremiums)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postPremiums)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postPremiumsBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postPremiumsBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postPremiumsByUname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postPremiumsByUname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postQualityEarned)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postQualityEarned)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postShares)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postShares)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postStatusBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postStatusBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postStatusByUname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postStatusByUname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postF1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postF1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postF2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postF2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postF3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postF3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postF4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postF4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postF5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postF5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postFlags)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postFlags)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postFlagsBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postFlagsBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postFlagsByUname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postFlagsByUname)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

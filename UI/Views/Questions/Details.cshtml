@@ -1,0 +1,666 @@
+﻿@model UI.Models.QAModel
+
+<script>
+function showDiv(DivId, DivToHide, anotherDivToHide) {
+document.getElementById(DivId).style.display = "block";
+document.getElementById(DivToHide).style.display = "none";
+document.getElementById(anotherDivToHide).style.display = "none";
+}
+</script>
+
+@if (Model.question != null)
+{
+    if (Model.question.Q_Title != null)
+    {
+        <div class="row">
+
+            <div class="col-md-2">
+                <div class="searchActions">
+
+                    <div class="form-group">
+                        <a title="Click to view all questions" href="@Url.Action("Index", "Questions", new { id = Model.question.QuestionId })"> <i class="fa fa-angle-double-left"> </i> Questions </a>
+
+                        <a class="btn btn-default" title=" answer this question" style="" onclick="showDiv('AnswerForm','','')" href="#AnswerForm">
+                            <i class="fa fa-check"></i> Answer
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-7" style="padding-top:2%;">
+
+                @if (TempData["StatusMsg"] != null)
+                {
+                    if (TempData["Title"] == null)
+                    {
+                        TempData["Title"] = Model.question.Q_Title;
+                    }
+
+                    <div class="Warning">
+                        @TempData["StatusMsg"]
+                    </div>
+                }
+
+                <div class="postMeta">
+
+                    <a class="casual" title="Asked @Convert.ToInt64(DateTime.Now.Subtract(Model.question.Q_Dt).TotalDays) day(s) ago" href="#">
+                        <i class="fa fa-calendar"> </i> Asked @Model.question.Q_Dt
+                    </a>
+
+                    @* TODO: implement this
+                        <a class="casual" title="This question is shared @Model.question.Q_Shares times" href="#">
+                        <i class="fa fa-share-alt"> </i> @Model.question.Q_Shares share
+                        </a>
+                    *@
+
+                    <a class="casual" title="This question is viewed @Model.question.Q_Views times" href="#">
+                        <i class="fa fa-dot-circle-o"> </i> @Model.question.Q_Views views
+                    </a>
+
+                </div>
+
+                <div class="Items"  id="postDetails">
+
+                    <div class="rowItem" id="questionItem_@Model.question.QuestionId">
+
+                        <div class="postFields" title="tags" style="float: right;">
+                            @Model.question.Q_Fields
+                        </div>
+
+                        <div class="postTitle" style="">
+
+                            <a href="/Questions/Details?QuestionId=@Model.question.QuestionId" class="title">
+                                @Model.question.Q_Title
+                            </a>
+
+                        </div>
+
+                        <div class="postOptions-vertical" style="">
+
+                            @* TODO: add this feature
+                                <div class="">
+                                <a title="Add to question bank" href="@Url.Action("Save", "Questions", new { Model })">
+                                <i class="fa fa-plus"></i>
+                                </a>
+                                </div>
+                            *@
+
+                            @* TODO: add flagging
+                                <div>
+                                <a title="Click to flag this post as inappropriate" href="@Url.Action("Flag", "Questions", new { id = Model.question.QuestionId })">
+                                <i style="" class="fa fa-flag"> </i>
+                                </a>
+                                </div>
+                            *@
+
+                            <div>
+                                <a title="Click to delete this post" href="/Questions/Delete?QuestionId=@Model.question.QuestionId">
+                                    <i style="" class="fa fa-remove"> </i>
+                                </a>
+                            </div>
+
+                            @if (Model.question.Q_By == int.Parse(TempData["LoggedInUser"].ToString()))
+                            {
+                                <div>
+                                    <a title="Click to improve this post" href="#ImproveQuestion" onclick="showDiv('ImproveQuestion','postDetails','')">
+                                        <i class=" fa fa-refresh"> </i>
+                                    </a>
+                                </div>}
+
+                        </div>
+
+                        <div class="postWiki" style="">
+
+                            @Html.Raw(Model.question.Q_WikiHtml)
+
+                        </div>
+
+                        <div class="postOptions-horizontal" style="">
+
+                            <div class="Votes" style="">
+
+                                <a href="/posts/postMarks?returnUrl=@ViewContext.HttpContext.Request.Url.PathAndQuery&MarksType=1&postId=@Model.question.QuestionId&postType=@Model.question.postType&postBy=@Model.question.Q_By">
+                                    <i class="fa fa-chevron-circle-up" title="This post is useful"></i>
+                                </a>
+
+                                <div title="This post earned @Model.question.Q_MarksEarned marks">
+                                    @Model.question.Q_MarksEarned
+                                </div>
+
+                                <a href="/posts/postMarks?returnUrl=@ViewContext.HttpContext.Request.Url.PathAndQuery&MarksType=-1&postId=@Model.question.QuestionId&postType=@Model.question.postType&postBy=@Model.question.Q_By">
+                                    <i class="fa fa-chevron-circle-down" title="Click to mark this as not useful"></i>
+                                </a>
+
+                            </div>
+
+                            <div class="Author">
+                                <a href="/Account/UserProfileByUserNumber?UserNumber=@Model.question.Q_By" title="Author">
+                                    by @Model.question.Q_ByUname
+                                </a>
+
+                                <span title="Total marks scored"> @Model.question.Q_ByMarksScore </span>
+                                <!--TODO: add user profile badge data everywhere
+                                <span title="Trophies awarded"> <i class="fa fa-trophy"> </i> </span> class="casual">
+                                <span title="Certificates awarded"> <i class="fa fa-certificate"></i> </span-->
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="postComments">
+
+                            @if (Model.question.questionComments.Count > 0)
+                            {
+                                foreach (UI.Models.QuestionComment questionComment in Model.question.questionComments)
+                                {
+
+                                    <hr />
+
+                                    <div class="commentItem" id="questionCommentTxt_@questionComment.CommentId">
+
+                                        <div class="Votes" style="">
+
+                                            <a href="/posts/postMarks?returnUrl=@ViewContext.HttpContext.Request.Url.PathAndQuery&MarksType=1&postId=@questionComment.CommentId&postType=@questionComment.postType&postBy=@questionComment.CommentBy">
+                                                <i class="fa fa-chevron-circle-up" title="This comment is useful"></i>
+                                            </a>
+
+                                            @if (questionComment.CommentMarksEarned != 0)
+                                            {
+                                                <div class="casual" title="Marks earned by this comment">
+                                                    @questionComment.CommentMarksEarned
+                                                </div>
+
+                                            }
+
+
+                                            <a href="/posts/postMarks?returnUrl=@ViewContext.HttpContext.Request.Url.PathAndQuery&MarksType=-1&postId=@questionComment.CommentId&postType=@questionComment.postType&postBy=@questionComment.CommentBy">
+                                                <i class="fa fa-chevron-circle-down" title="Click to mark this as not useful"></i>
+                                            </a>
+
+                                        </div>
+
+                                        @Html.Raw(questionComment.CommentTxtHtml)
+
+                                        <div class="Commenter">
+                                            <a class="casual" title="@questionComment.CommentDt" href="#">
+                                                <i class="fa fa-calendar"> </i> @Convert.ToInt64(DateTime.Now.Subtract(questionComment.CommentDt).TotalDays) day(s) ago
+                                            </a>
+
+                                            <a href="/Account/UserProfileByUserNumber?UserNumber=@questionComment.CommentBy" title="">
+                                                <span>
+                                                    by @questionComment.CommentByUname
+                                                    <span title="Total marks scored"> @questionComment.CommentByMarksScore </span>
+                                                </span>
+                                            </a>
+                                        </div>
+
+                                        @if (questionComment.CommentBy == int.Parse(TempData["LoggedInUser"].ToString()))
+                                        {
+                                            <a class="casual" title="Click to update this comment" onclick="showDiv('questionCommentUpdateForm_@questionComment.CommentId','questionCommentTxt_@questionComment.CommentId','questionCommentForm_@Model.question.QuestionId')" href="#questionCommentUpdateForm_@questionComment.CommentId" id="commentQuestion-@questionComment.CommentId">
+                                                <i class=" fa fa-refresh"> </i>
+                                            </a>
+                                        }
+
+                                    </div>
+
+                                    using (Html.BeginForm("Update", "QuestionComments", FormMethod.Post, new { @style = "display:none;", id = "questionCommentUpdateForm_" + @questionComment.CommentId }))
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                        <textarea cols="60" id="question_questionComment_CommentTxt" name="question.questionComment.CommentTxt" rows="3"> @questionComment.CommentTxt </textarea>
+
+                                        @*<input id="questionComment_QuestionId" name="question.QuestionId" type="hidden" value="@Model.question.QuestionId">*@
+
+                                        <input data-val="true" data-val-number="The field CommentId must be a number." data-val-required="The CommentId field is required." id="question_questionComment_CommentId" name="question.questionComment.CommentId" type="hidden" value="@questionComment.CommentId">
+                                        @Html.HiddenFor(model => model.question.QuestionId)
+
+                                        <input type="submit" class="tab" value="Improve" />
+                                    }
+                                }
+                            }
+
+
+                            @using (Html.BeginForm("Create", "QuestionComments", FormMethod.Post, new { @style = "display:none;", id = "questionCommentForm_" + @Model.question.QuestionId }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                @Html.TextAreaFor(model => model.question.questionComment.CommentTxt, new { @cols = 60, @rows = 3 })
+
+                                @*<input id="questionComment_QuestionId" name="question.QuestionId" type="hidden" value="@Model.question.QuestionId">*@
+
+                                @Html.HiddenFor(model => model.question.QuestionId)
+
+                                <input type="submit" class="tab" value="Ask for clarification" />
+                            }
+
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <a class="casual" title="Click to ask for clarification" onclick="showDiv('questionCommentForm_@Model.question.QuestionId','','')" href="#questionItem_@Model.question.QuestionId" id="questionComment-@Model.question.QuestionId">
+                            <i class=" fa fa-comment"> </i>
+                        </a>
+                    </div>
+
+
+                    @*<a class="tab" title="Click to listen" onclick="speak('@Model.question.Q_Wiki')">
+                        <i class="fa fa-play"></i> TODO: add this - > Speak (beta)
+                        </a>*@
+
+                    <div class="postCount" style="/**/">
+
+                        <span title="Number of answer(s) for this question"> @Model.answer.answers.Count answer(s) </span>
+
+                    </div>
+
+
+                    @foreach (var answer in Model.answer.answers)
+                    {
+                        <div class="rowItem" id="answerItem_@answer.AnswerId">
+
+                            <div class="postTitle" style="">
+
+                                <a href="#answerItem_@answer.AnswerId" class="title">
+                                    @*TODO: title="Click to view this post in full screen" redirect answer href to to /Answers/Details?AnswerId=@answer.AnswerId*@
+                                    @answer.A_Title
+                                </a>
+
+                            </div>
+
+                            <div class="postOptions-vertical" style="">
+                                @* TODO: add flaggin mechanism
+                                    <div>
+                                    <a title="Click to flag this post as inappropriate" href="@Url.Action("Flag", "Posts", new { id = answer.AnswerId })">
+                                    <i style="" class="fa fa-flag"> </i>
+                                    </a>
+                                    </div>
+                                *@
+
+                                @if (answer.A_By == int.Parse(TempData["LoggedInUser"].ToString()))
+                                {
+                                    <div>
+                                        <a title="Click to delete this post" href="/Answers/Delete?AnswerId=@answer.AnswerId&QuestionId=@Model.question.QuestionId">
+                                            <i style="" class="fa fa-remove"> </i>
+                                        </a>
+                                    </div>
+
+                                    <div>
+                                        <a title="Click to improve this post" href="/Answers/Edit?AnswerId=@answer.AnswerId">
+                                            <i class=" fa fa-refresh"> </i>
+                                        </a>
+                                    </div>
+                                }
+
+                            </div>
+
+                            <div class="postWiki" style="">
+
+                                @Html.Raw(answer.A_WikiHtml)
+
+                            </div>
+
+                            <div class="postOptions-horizontal" style="">
+
+                                <div class="Votes" style="" title="This post earned @answer.A_MarksEarned marks">
+
+                                    <a href="/posts/postMarks?returnUrl=@ViewContext.HttpContext.Request.Url.PathAndQuery&MarksType=1&postId=@answer.AnswerId&postType=@answer.postType&postBy=@answer.A_By">
+                                        <i class="fa fa-chevron-circle-up" title="This post is useful"></i>
+                                    </a>
+
+                                    <div>
+                                        @answer.A_MarksEarned
+                                    </div>
+
+                                    <a href="/posts/postMarks?returnUrl=@ViewContext.HttpContext.Request.Url.PathAndQuery&MarksType=-1&postId=@Model.answer.AnswerId&postType=@answer.postType&postBy=@answer.A_By">
+                                        <i class="fa fa-chevron-circle-down" title="Click to mark this as not useful"></i>
+                                    </a>
+
+                                </div>
+
+                                <div class="Author">
+                                    <a href="/Account/UserProfileByUserNumber?UserNumber=@answer.A_By" title="Author">
+                                        by @answer.A_ByUname
+                                    </a>
+
+                                    <span title="Total marks scored"> @answer.A_ByMarksScore </span>
+                                    <!--TODO: implement trophies and certs system <span title="Trophies awarded"> <i class="fa fa-trophy"> </i> </span> class="casual">
+                                    <span title="Certificates awarded"> <i class="fa fa-certificate"></i> </span-->
+
+                                </div>
+
+                            </div>
+
+                            <hr />
+
+                            <div class="postComments">
+
+                                <div>
+                                    <a title="Click to ask for clarification" onclick="showDiv('answerCommentForm_@answer.AnswerId','','')" href="#answerItem_@answer.AnswerId" id="answerComment-@answer.AnswerId">
+                                        <i class=" fa fa-comment"> </i>
+                                    </a>
+                                </div>
+
+                                @foreach (UI.Models.AnswerComment answerComments in answer.answerComments)
+                                {
+                                    <span> @answerComments.CommentTxt </span>
+                                }
+
+                                @using (Html.BeginForm("Create", "AnswerComments", FormMethod.Post, new { @style = "display:none;", id = "answerCommentForm_" + @answer.AnswerId }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    @Html.TextAreaFor(model => model.answer.answerComment.CommentTxt, new { @cols = 60, @rows = 3 })
+
+                                    @*@<input id="answerComment_AnswerId" name="answer.Comment_AnswerId" type="hidden" value="@Model.answer.AnswerId">
+                                    *@
+                                    @Html.HiddenFor(model => model.question.QuestionId)
+                                    @Html.HiddenFor(model => answer.AnswerId)
+
+                                    <input type="submit" class="tab" value="Ask for clarification" />
+
+                                }
+
+                            </div>
+
+
+                        </div>
+
+                        @*<a class="tab" title="Click to listen" onclick="speak('@answer.A_Wiki')">
+                            <i class="fa fa-play"></i> TODO: add this - > Speak (beta)
+                            </a>*@
+
+                    }
+
+
+                    @*
+    @using (Html.BeginForm("Create", "Answers", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal" id="AnswerForm" style="float:left;">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(model => model.question.QuestionId)
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.answer.A_Title, new { @placeholder = "Answer title", @class = "wideInput form-control" })
+                    @Html.LabelFor(model => model.answer.A_Title, "", new { @class = "casual" })
+                    @Html.ValidationMessageFor(model => model.answer.A_Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div class="wmd-panel">
+                        <div id="wmd-button-bar"></div>
+                        @Html.TextAreaFor(model => model.answer.A_Wiki, new { @placeholder = "Answer description", @class = "wmd-input form-control", @id = "wmd-input", @name = "mas", @cols = "90", @rows = "15" })
+                        @Html.LabelFor(model => model.answer.A_Wiki, "", new { @class = "casual" })
+                        @Html.ValidationMessageFor(model => model.answer.A_Wiki)
+                    </div>
+
+                    <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+                    <!--use this to test MathJax : $\sin^2 \theta$-->
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <!--class was removed col-md-offset-2 -->
+                    <input type="submit" value="Post my answer" class="btn btn-default" />
+                </div>
+            </div>
+
+        </div>
+    }*@
+
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3" style="">
+
+            </div>
+
+        </div>
+
+
+    }
+}
+
+
+<link rel="stylesheet" href="~/Content/mdStyles/mdMain.css" />
+<script type="text/javascript" src="~/Scripts/mdScripts/Markdown.Converter.js"></script>
+<script type="text/javascript" src="~/Scripts/mdScripts/Markdown.Sanitizer.js"></script>
+<script type="text/javascript" src="~/Scripts/mdScripts/Markdown.Editor.js"></script>
+
+@using (Html.BeginForm("Update", "Questions", FormMethod.Post, new { @style = "display:none;", @id = "ImproveQuestion" }))
+{
+
+    <h2> Improve this post </h2> 
+    <div class="form-group">
+
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <input id="question_QuestionId" name="question.QuestionId" type="hidden" value="@Model.question.QuestionId">
+            <input id="question_Q_By" name="question.Q_By" type="hidden" value="@Model.question.Q_By">
+
+            <hr />
+            <div class="col-md-2"></div>
+            <div class="col-md-7">
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.question.Q_Title, new { @placeholder = "My question", @class = "wideInput form-control" })
+                        @Html.LabelFor(model => model.question.Q_Title, new { @class = "casual" })
+                        @Html.ValidationMessageFor(model => model.question.Q_Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    @*Html.LabelFor(model => model.Q_Wiki, htmlAttributes: new { @class = "control-label col-md-2" })*@
+
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10">
+
+                            @Html.LabelFor(model => model.question.Q_Wiki, new { @class = "casual" })
+                            <div class="wmd-panel">
+                                <div>
+                                    <div id="wmd-button-bar"></div>
+
+                                    <textarea class="wmd-input form-control" cols="90" data-val="true" data-val-required="* Describe your question" id="wmd-input" name="question.Q_Wiki" placeholder="Question description" rows="15">
+Use above buttons for adding links, headings, lists, quotes and more.
+                                    </textarea>
+                                    @*Html.TextAreaFor(model => model.question.Q_Wiki, new { @placeholder = "Question description", @class = "wmd-input form-control", @id = "wmd-input", @name = "mas", @cols = "90", @rows = "15" })*@
+                                    @Html.ValidationMessageFor(model => model.question.Q_Wiki)
+                                </div>
+                                <div id="wmd-preview" class="wmd-preview">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!--TODO: Remove this - it is needed to test MathJax $\sin^2 \theta$-->
+                        <div class="col-md-1"></div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-2"></div>
+
+            <div class="col-md-7">
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.question.Q_Fields, new { id = "fields", placeholder = "eg: chemistry", @class = "form-control wideInput" })
+                        @Html.LabelFor(model => model.question.Q_Fields, new { @class = "casual  text-danger" })
+                        @Html.ValidationMessageFor(model => model.question.Q_Fields, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.question.Q_EditSummary, new { placeholder = "Explain why edit was necessary", @class = "form-control wideInput" })
+                        @Html.LabelFor(model => model.question.Q_EditSummary, new { @class = "casual  text-danger" })
+                        @Html.ValidationMessageFor(model => model.question.Q_EditSummary, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <!--class was removed col-md-offset-2 -->
+                        <input type="submit" value="Update this question" class="btn btn-default" />
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-3"></div>
+
+        </div>
+
+
+    </div>
+
+}
+
+@using (Html.BeginForm("Create", "Answers", FormMethod.Post, new { @style = "display:none;", @id = "AnswerForm" }))
+{
+
+    <h2> Post answer </h2>
+
+    <div class="form-group">
+
+        @Html.AntiForgeryToken()
+        <div class="row">
+
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(model => model.question.QuestionId)
+
+            <div class="col-md-2"></div>
+            <div class="col-md-7">
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.answer.A_Title, new { @placeholder = "Answer title", @class = "wideInput form-control" })
+                        @Html.LabelFor(model => model.answer.A_Title, "", new { @class = "casual" })
+                        @Html.ValidationMessageFor(model => model.answer.A_Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    @*Html.LabelFor(model => model.answer.A_Wiki, htmlAttributes: new { @class = "control-label col-md-2" })*@
+
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10">
+
+                            @Html.LabelFor(model => model.answer.A_Wiki, new { @class = "casual" })
+                            <div class="wmd-panel">
+                                <div>
+                                    <div id="wmd-button-bar"></div>
+
+                                    <textarea class="wmd-input form-control" cols="90" data-val="true" data-val-required="* Describe your answer" id="wmd-input" name="answer.A_Wiki" placeholder="Answer description" rows="15">
+Use above buttons for adding links, headings, lists, quotes and more.
+                                    </textarea>
+                                    @*Html.TextAreaFor(model => model.answer.A_Wiki, new { @placeholder = "Answer description", @class = "wmd-input form-control", @id = "wmd-input", @name = "mas", @cols = "90", @rows = "15" })*@
+                                    @Html.ValidationMessageFor(model => model.answer.A_Wiki)
+                                </div>
+                                <div id="wmd-preview" class="wmd-preview">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!--TODO: Remove this - it is needed to test MathJax $\sin^2 \theta$-->
+                        <div class="col-md-1"></div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-2"></div>
+
+            <div class="col-md-7">
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <!--class was removed col-md-offset-2 -->
+                        <input type="submit" value="Post answer" class="btn btn-default" />
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-3"></div>
+
+        </div>
+
+
+    </div>
+
+}
+
+<script type="text/javascript">
+    (function () {
+        var converter1 = Markdown.getSanitizingConverter();
+
+        converter1.hooks.chain("preBlockGamut", function (text, rbg) {
+            return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
+                return "<blockquote>" + rbg(inner) + "</blockquote>\n";
+            });
+        });
+
+        var editor1 = new Markdown.Editor(converter1);
+
+        editor1.run();
+    })();
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

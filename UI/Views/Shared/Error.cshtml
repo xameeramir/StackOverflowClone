@@ -1,0 +1,29 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+<style>
+    ul 
+    {
+        list-style:none; 
+    }
+</style>
+@{
+    TempData["Title"] = "Error";
+}
+<div class="Warning">
+
+    <div>
+        <h1 class="text-danger">Sorry!</h1>
+    </div>
+
+    <div>
+        <h2 class="text-danger">@Html.ValidationSummary(true, "", new { @class = "text-danger" })</h2>
+    </div>
+
+    @if (TempData["StatusMsg"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["StatusMsg"]
+        </div>
+    }
+
+    @Html.Raw(@TempData["ErrorPrevention"])
+</div>

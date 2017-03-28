@@ -1,0 +1,81 @@
+﻿@model IEnumerable<UI.Models.AnswerComment>
+
+@{
+    TempData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CommentTxt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommentBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommentDt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommentStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommentStatusBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommentMarksEarned)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommentEdits)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommentType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AnswerId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommentTxt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommentBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommentDt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommentStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommentStatusBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommentMarksEarned)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommentEdits)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommentType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AnswerId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CommentId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CommentId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CommentId })
+        </td>
+    </tr>
+}
+
+</table>

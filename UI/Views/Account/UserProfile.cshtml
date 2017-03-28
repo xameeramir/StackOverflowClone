@@ -1,0 +1,191 @@
+﻿@using UI.Models
+@model UI.Models.ApplicationUser
+@{
+    TempData["Title"] = string.Format("{0}'s {1}", Model.UserName/*user.Title*/, "profile");
+}
+
+@if (TempData["StatusMsg"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["StatusMsg"]
+    </div>
+}
+
+
+<div class="wrapper">
+    <div class="main">
+        <p class="main-desc">
+        </p>
+        <!-- tabs -->
+        <div class="tabs">
+            <a href="#" data-tab="1" class="tab active"> Profile </a>
+            <a href="#" data-tab="2" class="tab"> Contribution </a>
+            @if (Request.IsAuthenticated && User.Identity.Name == Model.UserName)
+            {
+                @* TODO: test this *@
+                <a href="/Manage/Index" class="tab" style="float:right;" title="Manage profile">
+                    Manage <i class="fa fa-wrench"></i>
+                </a>
+    <a href="#" data-tab="3" class="tab" style="float:right;" title="Click to update profile">
+        Update <i class="fa fa-refresh"> </i>
+    </a>
+            }
+
+
+            <div data-content="1" class="content-tab active">
+
+                <a class="pull-left profileIcon" href="/Account/UserProfileByUserNumber?UserNumber=@Model.UserNumber">
+                    <img title="@Model.UserName's icon" class="media-object update-card-MDimentions" src="@Url.Action("Index", "NIdenticon", new { dimension = 96 , text =
+                                                          string.Format("{0}{1}{2}",Model.UserName,DateTime.Now.Date, Model.MarksScore)
+                                                          }) ">
+                </a>
+
+                <div class="media block-update-card">
+                    <h1 title="Username" class="media-heading">
+                        @Model.UserName.RemoveHandleFromUserName() @* TODO: implement this later - (@user.Title)*@
+                    </h1>
+                    <div class="media-body update-card-body">
+                        <div title="Location" class="btn-group fa fa-map-marker"> </div> @Model.Location
+                        @* TODO: collect location information by IP address *@
+                        <div title="Website" class="btn-group fa fa-link"> </div> @Model.Website
+
+                    </div>
+                    
+                    <div class="update-card-body">
+                        <div class="update-card-body">
+
+                            <div title="Total marks score" > Total marks scored : @Model.MarksScore </div>
+                            <div title=""> Joined : @Model.Joined.ToShortDateString() </div>
+                            
+                            <div class="update-card-body">
+
+                                <span title="Display status">
+                                    @Model.DisplayStatus
+                                </span>
+                            </div>
+
+                            </div>
+                        <!--
+                        <div class="btn-toolbar card-body-social" role="toolbar">
+                            <div class="btn-group fa fa-github git"></div>
+                            <div class="btn-group linkedin fa fa-linkedin-square"></div>
+                            <div class="btn-group twitter fa fa-twitter"></div>
+                            <div class="btn-group facebook fa fa-facebook"></div>
+                            <div class="btn-group google-plus fa fa-google-plus"></div>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+
+            <div data-content="2" class="content-tab">
+                <ul>
+                    <li>
+                        <a href="/Questions/QuestionsByUser?Q_By=@Model.UserNumber&Q_ByUName=@Model.UserName"> Question(s) by this user </a>
+                    </li>
+                    @*
+    <li>
+        <a href="/Answers/AnswersByUser?A_By=@Model.UserNumber&A_ByUName=@Model.UserName"> Answer(s) by this user </a>
+    </li>*@
+                </ul>
+            </div>
+
+            <div data-content="3" class="content-tab">
+
+                <div class="row">
+<div class="col-md-2">
+
+</div>
+
+                    <div class="col-md-7">
+
+                        @using (Html.BeginForm("Update", "Account", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            @Html.HiddenFor(user => user.UserNumber)
+
+                            <div class="form-horizontal">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        <input class="form-control" data-val="true" data-val-required="The UserName field is required." id="UserName" name="UserName" placeholder="" type="text" 
+                                               value="@Model.UserName.RemoveHandleFromUserName()">
+                                        @Html.LabelFor(user => user.UserName, new { @class = "casual" })
+                                        @Html.ValidationMessageFor(user => user.UserName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(user => user.Email, new { @placeholder = "", @class = "form-control" })
+                                        @Html.LabelFor(user => user.Email, new { @class = "casual" })
+                                        @Html.ValidationMessageFor(user => user.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(user => user.Location, new { @placeholder = "", @class = "form-control" })
+                                        @Html.LabelFor(user => user.Location, new { @class = "casual" })
+                                        @Html.ValidationMessageFor(user => user.Location, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(user => user.Website, new { @placeholder = "", @class = "form-control" })
+                                        @Html.LabelFor(user => user.Website, new { @class = "casual" })
+                                        @Html.ValidationMessageFor(user => user.Website, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(user => user.DisplayStatus, new { @placeholder = "", @class = "form-control" })
+                                        @Html.LabelFor(user => user.DisplayStatus, new { @class = "casual" })
+                                        @Html.ValidationMessageFor(user => user.DisplayStatus, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        <!--class was removed col-md-offset-2 -->
+                                        <input type="submit" value="Update profile" class="btn btn-default" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+
+                    </div>
+
+                    <div class="col-md-2">
+
+                    </div>
+                </div>
+
+            </div>
+
+            </div>
+        <!-- /tabs -->
+    </div>
+</div>
+<!--  script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>');</script-->
+<script>
+    $(function () {
+
+        $('[data-tab]').on('click', function (e) {
+            $(this)
+              .addClass('active')
+              .siblings('[data-tab]')
+              .removeClass('active')
+              .siblings('[data-content=' + $(this).data('tab') + ']')
+              .addClass('active')
+              .siblings('[data-content]')
+              .removeClass('active');
+            e.preventDefault();
+        });
+
+    });
+</script>

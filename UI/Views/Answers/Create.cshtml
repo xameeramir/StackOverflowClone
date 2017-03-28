@@ -1,0 +1,134 @@
+﻿@model UI.Models.Answer
+
+@{
+    TempData["Title"] = "Share your knowledge!";
+}
+
+<link rel="stylesheet" href="~/Content/mdStyles/mdMain.css" />
+<script type="text/javascript" src="~/Scripts/mdScripts/Markdown.Converter.js"></script>
+<script type="text/javascript" src="~/Scripts/mdScripts/Markdown.Sanitizer.js"></script>
+<script type="text/javascript" src="~/Scripts/mdScripts/Markdown.Editor.js"></script>
+
+@if (TempData["Guideline"] != null || TempData["StatusMsg"] != null)
+{
+    <div class="row Tip Warning">
+
+        <div class="col-md-6">
+            <h4 class="" style="text-align:center;"> @Html.Raw(TempData["Guideline"]) </h4>
+        </div>
+
+        <div class="col-md-6">
+            <h4 class="" style="text-align:center;"> @Html.Raw(TempData["StatusMsg"]) </h4>
+        </div>
+
+    </div>
+}
+
+@using (Html.BeginForm("Create", "Answers", FormMethod.Post))
+{
+
+    <div class="form-group">
+        @Html.HiddenFor(model => model.QuestionId)
+
+        @Html.AntiForgeryToken()
+        <div class="row">
+
+            <hr />
+            <div class="col-md-2"></div>
+            <div class="col-md-7">
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.A_Title, new { @placeholder = "Answer title", @class = "wideInput form-control" })
+                        @Html.LabelFor(model => model.A_Title, new { @class = "casual" })
+                        @Html.ValidationMessageFor(model => model.A_Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    @*Html.LabelFor(model => model.Q_Wiki, htmlAttributes: new { @class = "control-label col-md-2" })*@
+
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10">
+
+                            @Html.LabelFor(model => model.A_Wiki, new { @class = "casual" })
+                            <div class="wmd-panel">
+                                <div>
+                                    <div id="wmd-button-bar"></div>
+
+                                    <textarea class="wmd-input form-control" cols="90" data-val="true" data-val-required="* Describe your answer" id="wmd-input" name="A_Wiki" placeholder="Answer description" rows="15">
+                                        Use above buttons for adding links, headings, lists, quotes and more.
+                                    </textarea>
+                                    @Html.ValidationMessageFor(model => model.A_Wiki)
+                                </div>
+                                <div id="wmd-preview" class="wmd-preview">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!--TODO: Remove this - it is needed to test MathJax $\sin^2 \theta$-->
+                        <div class="col-md-1"></div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-2"></div>
+
+            <div class="col-md-7">
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <!--class was removed col-md-offset-2 -->
+                        <input type="submit" value="Post answer" class="btn btn-default" />
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-3"></div>
+
+        </div>
+
+
+    </div>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/javascript">
+    (function () {
+        var converter1 = Markdown.getSanitizingConverter();
+
+        converter1.hooks.chain("preBlockGamut", function (text, rbg) {
+            return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
+                return "<blockquote>" + rbg(inner) + "</blockquote>\n";
+            });
+        });
+
+        var editor1 = new Markdown.Editor(converter1);
+
+        editor1.run();
+    })();
+</script>

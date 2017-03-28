@@ -1,0 +1,51 @@
+﻿@using Microsoft.AspNet.Identity
+@using UI.Models
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a class="" style="background-color:#ffd42c; font-size:0.8em;" href="/Account/UserProfileByUserName?UserName=@User.Identity.GetUserName()" title='@string.Format("Hello {0}!",  User.Identity.GetUserName())'>
+                    <span>
+                        @if (TempData["UserControlMsg"] != null)
+                        {
+                            @TempData["UserControlMsg"]
+                        }
+                        else
+                        {
+                            @User.Identity.GetUserName()
+                        }
+                    </span>
+
+                    <span>
+                        @User.Identity.GetCurUser().MarksScore
+                    </span>
+
+                </a>
+            </li>
+@*            todo: implement this <li>
+        <a href="/Users" title="Total marks scored"> <i class="fa fa-line-chart"></i> </a>
+    </li>
+            <li>
+                <a title="Notifications" href="@Url.Action("Notifications", "Home")"> <i class="fa fa-bell"></i> </a>
+            </li>*@
+            <li>
+                <a href="javascript:document.getElementById('logoutForm').submit()" title="Click to sign out"> <i class="fa fa-sign-out"></i> </a>
+            </li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a id="registerLink" style="background-color:#ffd42c; font-size:0.8em;" title="Click to get your free account" href="/Account/Register"> <i class='fa fa-user-plus'></i> </a>
+        </li>
+        <li>
+            <a id="loginLink" title="Click to sign in" href="/Account/Login"> <i class='fa fa-sign-in'></i> </a>
+        </li>
+    </ul>
+}

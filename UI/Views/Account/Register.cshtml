@@ -1,0 +1,99 @@
+﻿@model UI.Models.RegisterViewModel
+@{
+    TempData["Title"] = "Sign up";
+}
+
+@if (TempData["RedirectMsg"] != null)
+{
+    <div class="Tip Warning">
+
+        <h1 class="" style="text-align:center;"> @Html.Raw(TempData["RedirectMsg"]) </h1>
+
+    </div>
+}
+
+<h2></h2>
+<div class="row">
+    <div class="col-md-8">
+        <section id="loginForm">
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4></h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-12">
+                        @Html.TextBoxFor(m => m.Email, new { @placeholder = "eg: yourname@domain.tld", @class = "form-control" })
+                        @Html.LabelFor(m => m.Email, new { @class = "casual" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @Html.TextBoxFor(m => m.UserName, new { @placeholder = "eg: yourname", @class = "form-control" })
+                        @Html.LabelFor(m => m.UserName, new { @class = "casual" })
+                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        @Html.PasswordFor(m => m.Password, new { @placeholder = "eg: $ecret@123", @class = "form-control" })
+                        @Html.LabelFor(m => m.Password, new { @class = "casual" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = "same as above", @class = "form-control" })
+                        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "casual" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <!--class was removed col-md-offset-2 -->
+                        <input type="submit" class="btn btn-default" value="Sign up" />
+                    </div>
+                </div>
+            }
+
+            <p class="casual">
+                By using our services you trust us about your <a href="/Home/Privacy"> personal privacy </a>.
+            </p>
+
+            <p>
+                @Html.ActionLink("I have an account", "Login")
+            </p>
+            <!-- TODO: Enable this once you have account confirmation enabled for password reset functionality -->
+            <p>
+                @Html.ActionLink("Password lost?", "ForgotPassword")
+            </p>
+
+        </section>
+
+    </div>
+
+    <div class="col-md-4">
+@* TODO: enable this
+    <section id="socialLoginForm">
+        <hr />
+
+        <h4> Sign up with </h4>
+
+        @Html.Partial("~/Views/Account/_ExternalLoginsListPartial.cshtml", new UI.Models.ExternalLoginListViewModel { returnUrl = ViewBag.returnUrl })
+    </section>*@
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

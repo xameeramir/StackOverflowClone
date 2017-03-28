@@ -1,0 +1,91 @@
+﻿@model UI.Models.QuestionComment
+
+@{
+    TempData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>QuestionComment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentTxt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentTxt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentDt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentDt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentStatusBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentStatusBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentMarksEarned)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentMarksEarned)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentEdits)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentEdits)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuestionId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuestionId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CommentId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
